@@ -1,0 +1,21 @@
+{
+   "name": "scribium",
+   "module": "index.ts",
+   "type": "module",
+   "private": true,
+   "devDependencies": {
+      "@types/bun": "latest"
+   },
+   "scripts": {
+      "format": "bunx prettier --write ."
+   },
+   "peerDependencies": {
+      "typescript": "^7"
+   },
+   "workspace": [
+      "packages/*"
+   ],
+   "dependencies": {
+      "prettier": "3.9.6"
+   }
+}

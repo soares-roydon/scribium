@@ -1,0 +1,1080 @@
+{
+   "schemaVersion": "1",
+   "targetFamily": "sql",
+   "target": "postgres",
+   "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
+   "roots": {
+      "comment": {
+         "model": "Comment",
+         "namespace": "public"
+      },
+      "follow": {
+         "model": "Follow",
+         "namespace": "public"
+      },
+      "like": {
+         "model": "Like",
+         "namespace": "public"
+      },
+      "post": {
+         "model": "Post",
+         "namespace": "public"
+      },
+      "post_Tag": {
+         "model": "Post_Tag",
+         "namespace": "public"
+      },
+      "tag": {
+         "model": "Tag",
+         "namespace": "public"
+      },
+      "user": {
+         "model": "User",
+         "namespace": "public"
+      }
+   },
+   "domain": {
+      "namespaces": {
+         "public": {
+            "models": {
+               "Comment": {
+                  "fields": {
+                     "comment": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "created_at": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "id": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "postId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "userId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "post": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["postId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "Post",
+                           "namespace": "public"
+                        }
+                     },
+                     "user": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["userId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "User",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "comment": {
+                           "column": "comment"
+                        },
+                        "created_at": {
+                           "column": "created_at"
+                        },
+                        "id": {
+                           "column": "id"
+                        },
+                        "postId": {
+                           "column": "postId"
+                        },
+                        "userId": {
+                           "column": "userId"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "comment"
+                  }
+               },
+               "Follow": {
+                  "fields": {
+                     "createdAt": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "followerId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "followingId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "follower": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["followerId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "User",
+                           "namespace": "public"
+                        }
+                     },
+                     "following": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["followingId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "User",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "createdAt": {
+                           "column": "createdAt"
+                        },
+                        "followerId": {
+                           "column": "followerId"
+                        },
+                        "followingId": {
+                           "column": "followingId"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "follow"
+                  }
+               },
+               "Like": {
+                  "fields": {
+                     "postId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "userId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "post": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["postId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "Post",
+                           "namespace": "public"
+                        }
+                     },
+                     "user": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["userId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "User",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "postId": {
+                           "column": "postId"
+                        },
+                        "userId": {
+                           "column": "userId"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "like"
+                  }
+               },
+               "Post": {
+                  "fields": {
+                     "authorId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "content": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "created_at": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "id": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "published_at": {
+                        "nullable": true,
+                        "type": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "slug": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "title": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "author": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["authorId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "User",
+                           "namespace": "public"
+                        }
+                     },
+                     "comments": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["postId"]
+                        },
+                        "to": {
+                           "model": "Comment",
+                           "namespace": "public"
+                        }
+                     },
+                     "likes": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["postId"]
+                        },
+                        "to": {
+                           "model": "Like",
+                           "namespace": "public"
+                        }
+                     },
+                     "tags": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["postId"]
+                        },
+                        "to": {
+                           "model": "Post_Tag",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "authorId": {
+                           "column": "authorId"
+                        },
+                        "content": {
+                           "column": "content"
+                        },
+                        "created_at": {
+                           "column": "created_at"
+                        },
+                        "id": {
+                           "column": "id"
+                        },
+                        "published_at": {
+                           "column": "published_at"
+                        },
+                        "slug": {
+                           "column": "slug"
+                        },
+                        "title": {
+                           "column": "title"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "post"
+                  }
+               },
+               "Post_Tag": {
+                  "fields": {
+                     "postId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "tagId": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "post": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["postId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "Post",
+                           "namespace": "public"
+                        }
+                     },
+                     "tag": {
+                        "cardinality": "N:1",
+                        "nullable": false,
+                        "on": {
+                           "localFields": ["tagId"],
+                           "targetFields": ["id"]
+                        },
+                        "to": {
+                           "model": "Tag",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "postId": {
+                           "column": "postId"
+                        },
+                        "tagId": {
+                           "column": "tagId"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "post_Tag"
+                  }
+               },
+               "Tag": {
+                  "fields": {
+                     "id": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "name": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "postTags": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["tagId"]
+                        },
+                        "to": {
+                           "model": "Post_Tag",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "id": {
+                           "column": "id"
+                        },
+                        "name": {
+                           "column": "name"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "tag"
+                  }
+               },
+               "User": {
+                  "fields": {
+                     "bio": {
+                        "nullable": true,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "email": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "id": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "name": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     },
+                     "password": {
+                        "nullable": false,
+                        "type": {
+                           "codecId": "pg/text@1",
+                           "kind": "scalar"
+                        }
+                     }
+                  },
+                  "relations": {
+                     "comments": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["userId"]
+                        },
+                        "to": {
+                           "model": "Comment",
+                           "namespace": "public"
+                        }
+                     },
+                     "followers": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["followerId"]
+                        },
+                        "to": {
+                           "model": "Follow",
+                           "namespace": "public"
+                        }
+                     },
+                     "following": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["followingId"]
+                        },
+                        "to": {
+                           "model": "Follow",
+                           "namespace": "public"
+                        }
+                     },
+                     "likes": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["userId"]
+                        },
+                        "to": {
+                           "model": "Like",
+                           "namespace": "public"
+                        }
+                     },
+                     "posts": {
+                        "cardinality": "1:N",
+                        "on": {
+                           "localFields": ["id"],
+                           "targetFields": ["authorId"]
+                        },
+                        "to": {
+                           "model": "Post",
+                           "namespace": "public"
+                        }
+                     }
+                  },
+                  "storage": {
+                     "fields": {
+                        "bio": {
+                           "column": "bio"
+                        },
+                        "email": {
+                           "column": "email"
+                        },
+                        "id": {
+                           "column": "id"
+                        },
+                        "name": {
+                           "column": "name"
+                        },
+                        "password": {
+                           "column": "password"
+                        }
+                     },
+                     "namespaceId": "public",
+                     "table": "user"
+                  }
+               }
+            }
+         }
+      }
+   },
+   "storage": {
+      "namespaces": {
+         "public": {
+            "entries": {
+               "table": {
+                  "comment": {
+                     "columns": {
+                        "comment": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "created_at": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "default": {
+                              "expression": "now()",
+                              "kind": "function"
+                           },
+                           "nativeType": "timestamptz",
+                           "nullable": false
+                        },
+                        "id": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "postId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "userId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [
+                        {
+                           "source": {
+                              "columns": ["userId"],
+                              "namespaceId": "public",
+                              "tableName": "comment"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "user"
+                           }
+                        },
+                        {
+                           "source": {
+                              "columns": ["postId"],
+                              "namespaceId": "public",
+                              "tableName": "comment"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "post"
+                           }
+                        }
+                     ],
+                     "indexes": [
+                        {
+                           "columns": ["postId"],
+                           "name": "comment_postId_idx_a7a72715",
+                           "prefix": "comment_postId_idx",
+                           "unique": false
+                        },
+                        {
+                           "columns": ["userId"],
+                           "name": "comment_userId_idx_a489d58a",
+                           "prefix": "comment_userId_idx",
+                           "unique": false
+                        }
+                     ],
+                     "primaryKey": {
+                        "columns": ["id"]
+                     },
+                     "uniques": []
+                  },
+                  "follow": {
+                     "columns": {
+                        "createdAt": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "default": {
+                              "expression": "now()",
+                              "kind": "function"
+                           },
+                           "nativeType": "timestamptz",
+                           "nullable": false
+                        },
+                        "followerId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "followingId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [
+                        {
+                           "source": {
+                              "columns": ["followerId"],
+                              "namespaceId": "public",
+                              "tableName": "follow"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "user"
+                           }
+                        },
+                        {
+                           "source": {
+                              "columns": ["followingId"],
+                              "namespaceId": "public",
+                              "tableName": "follow"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "user"
+                           }
+                        }
+                     ],
+                     "indexes": [
+                        {
+                           "columns": ["followerId"],
+                           "name": "follow_followerId_idx_2aa6c62d",
+                           "prefix": "follow_followerId_idx",
+                           "unique": false
+                        },
+                        {
+                           "columns": ["followingId"],
+                           "name": "follow_followingId_idx_1cf16645",
+                           "prefix": "follow_followingId_idx",
+                           "unique": false
+                        }
+                     ],
+                     "primaryKey": {
+                        "columns": ["followerId", "followingId"]
+                     },
+                     "uniques": []
+                  },
+                  "like": {
+                     "columns": {
+                        "postId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "userId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [
+                        {
+                           "source": {
+                              "columns": ["userId"],
+                              "namespaceId": "public",
+                              "tableName": "like"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "user"
+                           }
+                        },
+                        {
+                           "source": {
+                              "columns": ["postId"],
+                              "namespaceId": "public",
+                              "tableName": "like"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "post"
+                           }
+                        }
+                     ],
+                     "indexes": [
+                        {
+                           "columns": ["postId"],
+                           "name": "like_postId_idx_a7a72715",
+                           "prefix": "like_postId_idx",
+                           "unique": false
+                        },
+                        {
+                           "columns": ["userId"],
+                           "name": "like_userId_idx_a489d58a",
+                           "prefix": "like_userId_idx",
+                           "unique": false
+                        }
+                     ],
+                     "primaryKey": {
+                        "columns": ["userId", "postId"]
+                     },
+                     "uniques": []
+                  },
+                  "post": {
+                     "columns": {
+                        "authorId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "content": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "created_at": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "default": {
+                              "expression": "now()",
+                              "kind": "function"
+                           },
+                           "nativeType": "timestamptz",
+                           "nullable": false
+                        },
+                        "id": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "published_at": {
+                           "codecId": "pg/timestamptz-temporal@1",
+                           "nativeType": "timestamptz",
+                           "nullable": true
+                        },
+                        "slug": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "title": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [
+                        {
+                           "source": {
+                              "columns": ["authorId"],
+                              "namespaceId": "public",
+                              "tableName": "post"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "user"
+                           }
+                        }
+                     ],
+                     "indexes": [
+                        {
+                           "columns": ["authorId"],
+                           "name": "post_authorId_idx_e47547ed",
+                           "prefix": "post_authorId_idx",
+                           "unique": false
+                        }
+                     ],
+                     "primaryKey": {
+                        "columns": ["id"]
+                     },
+                     "uniques": [
+                        {
+                           "columns": ["slug"]
+                        }
+                     ]
+                  },
+                  "post_Tag": {
+                     "columns": {
+                        "postId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "tagId": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [
+                        {
+                           "source": {
+                              "columns": ["postId"],
+                              "namespaceId": "public",
+                              "tableName": "post_Tag"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "post"
+                           }
+                        },
+                        {
+                           "source": {
+                              "columns": ["tagId"],
+                              "namespaceId": "public",
+                              "tableName": "post_Tag"
+                           },
+                           "target": {
+                              "columns": ["id"],
+                              "namespaceId": "public",
+                              "tableName": "tag"
+                           }
+                        }
+                     ],
+                     "indexes": [
+                        {
+                           "columns": ["postId"],
+                           "name": "post_Tag_postId_idx_a7a72715",
+                           "prefix": "post_Tag_postId_idx",
+                           "unique": false
+                        },
+                        {
+                           "columns": ["tagId"],
+                           "name": "post_Tag_tagId_idx_86854244",
+                           "prefix": "post_Tag_tagId_idx",
+                           "unique": false
+                        }
+                     ],
+                     "primaryKey": {
+                        "columns": ["postId", "tagId"]
+                     },
+                     "uniques": []
+                  },
+                  "tag": {
+                     "columns": {
+                        "id": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "name": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [],
+                     "indexes": [],
+                     "primaryKey": {
+                        "columns": ["id"]
+                     },
+                     "uniques": [
+                        {
+                           "columns": ["name"]
+                        }
+                     ]
+                  },
+                  "user": {
+                     "columns": {
+                        "bio": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": true
+                        },
+                        "email": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "id": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "name": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        },
+                        "password": {
+                           "codecId": "pg/text@1",
+                           "nativeType": "text",
+                           "nullable": false
+                        }
+                     },
+                     "foreignKeys": [],
+                     "indexes": [],
+                     "primaryKey": {
+                        "columns": ["id"]
+                     },
+                     "uniques": [
+                        {
+                           "columns": ["email"]
+                        }
+                     ]
+                  }
+               }
+            },
+            "id": "public",
+            "kind": "postgres-schema"
+         }
+      },
+      "storageHash": "fdfee8a763c0359398d8f6ba36c4b27d120781361425e275b3f2bc693546ea55"
+   },
+   "execution": {
+      "executionHash": "deca7024a189a6108da9e662bc0fe69968c8d4f1c71293e8099771369c7d7065",
+      "mutations": {
+         "defaults": [
+            {
+               "onCreate": {
+                  "id": "uuidv4",
+                  "kind": "generator"
+               },
+               "ref": {
+                  "column": "id",
+                  "namespace": "public",
+                  "table": "comment"
+               }
+            },
+            {
+               "onCreate": {
+                  "id": "uuidv4",
+                  "kind": "generator"
+               },
+               "ref": {
+                  "column": "id",
+                  "namespace": "public",
+                  "table": "post"
+               }
+            },
+            {
+               "onCreate": {
+                  "id": "uuidv4",
+                  "kind": "generator"
+               },
+               "ref": {
+                  "column": "id",
+                  "namespace": "public",
+                  "table": "tag"
+               }
+            },
+            {
+               "onCreate": {
+                  "id": "uuidv4",
+                  "kind": "generator"
+               },
+               "ref": {
+                  "column": "id",
+                  "namespace": "public",
+                  "table": "user"
+               }
+            }
+         ]
+      }
+   },
+   "capabilities": {
+      "postgres": {
+         "distinctOn": true,
+         "jsonAgg": true,
+         "lateral": true,
+         "limit": true,
+         "orderBy": true,
+         "returning": true
+      },
+      "sql": {
+         "checkConstraint": true,
+         "defaultInInsert": true,
+         "enums": true,
+         "lateral": true,
+         "returning": true,
+         "scalarList": true
+      }
+   },
+   "extensions": {},
+   "meta": {},
+   "_generated": {
+      "warning": "⚠️  GENERATED FILE - DO NOT EDIT",
+      "message": "This file is automatically generated by \"prisma contract emit\".",
+      "regenerate": "To regenerate, run: prisma contract emit"
+   }
+}

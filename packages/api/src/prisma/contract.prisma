@@ -1,0 +1,75 @@
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  bio       String?
+  password  String
+  posts     Post[]
+  following Follow[] @relation("UserFollowing")
+  followers Follow[] @relation("UserFollowers")
+  likes     Like[]
+  comments  Comment[]
+}
+
+model Post {
+  id           String     @id @default(uuid())
+  title        String
+  content      String
+  slug         String     @unique
+  created_at   DateTime   @default(now())
+  published_at DateTime?
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id])
+  tags         Post_Tag[]
+  likes        Like[]
+  comments    Comment[]
+}
+
+model Tag {
+  id   String @id @default(uuid())
+  name String @unique
+
+  postTags Post_Tag[]
+}
+
+model Post_Tag {
+  postId String
+  tagId  String
+
+  post Post @relation(fields: [postId], references: [id])
+  tag  Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([postId, tagId])
+}
+
+model Follow {
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("UserFollowers", fields: [followerId], references: [id])
+  following User @relation("UserFollowing", fields: [followingId], references: [id])
+
+  @@id([followerId, followingId])
+}
+
+model Like {
+  userId String
+  postId String
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+
+  @@id([userId, postId])
+}
+
+model Comment {
+  id    String    @id     @default(uuid())
+  comment   String
+  created_at  DateTime  @default(now())
+  userId  String
+  postId  String
+
+  user    User      @relation(fields: [userId], references: [id])
+  post    Post      @relation(fields: [postId], references: [id])
+}
