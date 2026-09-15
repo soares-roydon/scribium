@@ -55,6 +55,8 @@ export const postRepository = {
          authorId: userId,
       });
    },
-};
 
-postRepository.getBlogs();
+   getPostId(slug: string) {
+      return db.orm.public.Post.select('id').where({ slug }).first();
+   },
+};
