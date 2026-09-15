@@ -32,7 +32,9 @@ export const userService = {
          throw new AppError(403, 'Invalid credentials');
       }
 
-      const token = sign({userId: user.id}, process.env.JWT!, { expiresIn: '15m' });
+      const token = sign({ userId: user.id }, process.env.JWT_PASSWORD!, {
+         expiresIn: '15m',
+      });
 
       return {
          message: 'Signed in successfully',

@@ -34,7 +34,7 @@ export const userController = {
       res.cookie('token', result.token, {
          maxAge: 900000, // 15 minutes in milliseconds
          httpOnly: true, // Prevents client-side JS access
-         secure: true, // Only sends over HTTPS
+         // secure: true, // Only sends over HTTPS
       });
 
       return res.status(200).json({
