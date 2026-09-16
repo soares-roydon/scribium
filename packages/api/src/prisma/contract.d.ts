@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-   StorageHashBase<'fdfee8a763c0359398d8f6ba36c4b27d120781361425e275b3f2bc693546ea55'>;
+   StorageHashBase<'e72948db60fd09d76074b38d702d70403c32b796fff1c44c79508559dd65a8c1'>;
 export type ExecutionHash =
    ExecutionHashBase<'deca7024a189a6108da9e662bc0fe69968c8d4f1c71293e8099771369c7d7065'>;
 export type ProfileHash =
@@ -914,15 +914,15 @@ type ContractBase = Omit<
                      uniques: readonly [];
                      indexes: readonly [
                         {
-                           readonly name: 'follow_followerId_idx_2aa6c62d';
-                           readonly prefix: 'follow_followerId_idx';
-                           readonly columns: readonly ['followerId'];
-                           readonly unique: false;
-                        },
-                        {
                            readonly name: 'follow_followingId_idx_1cf16645';
                            readonly prefix: 'follow_followingId_idx';
                            readonly columns: readonly ['followingId'];
+                           readonly unique: false;
+                        },
+                        {
+                           readonly name: 'follow_followerId_idx_2aa6c62d';
+                           readonly prefix: 'follow_followerId_idx';
+                           readonly columns: readonly ['followerId'];
                            readonly unique: false;
                         },
                      ];
@@ -931,7 +931,7 @@ type ContractBase = Omit<
                            readonly source: {
                               readonly namespaceId: 'public' & NamespaceId;
                               readonly tableName: 'follow';
-                              readonly columns: readonly ['followerId'];
+                              readonly columns: readonly ['followingId'];
                            };
                            readonly target: {
                               readonly namespaceId: 'public' & NamespaceId;
@@ -943,7 +943,7 @@ type ContractBase = Omit<
                            readonly source: {
                               readonly namespaceId: 'public' & NamespaceId;
                               readonly tableName: 'follow';
-                              readonly columns: readonly ['followingId'];
+                              readonly columns: readonly ['followerId'];
                            };
                            readonly target: {
                               readonly namespaceId: 'public' & NamespaceId;
@@ -1346,7 +1346,7 @@ type ContractBase = Omit<
                         readonly cardinality: 'N:1';
                         readonly nullable: false;
                         readonly on: {
-                           readonly localFields: readonly ['followerId'];
+                           readonly localFields: readonly ['followingId'];
                            readonly targetFields: readonly ['id'];
                         };
                      };
@@ -1358,7 +1358,7 @@ type ContractBase = Omit<
                         readonly cardinality: 'N:1';
                         readonly nullable: false;
                         readonly on: {
-                           readonly localFields: readonly ['followingId'];
+                           readonly localFields: readonly ['followerId'];
                            readonly targetFields: readonly ['id'];
                         };
                      };
@@ -1691,7 +1691,7 @@ type ContractBase = Omit<
                         readonly cardinality: '1:N';
                         readonly on: {
                            readonly localFields: readonly ['id'];
-                           readonly targetFields: readonly ['followerId'];
+                           readonly targetFields: readonly ['followingId'];
                         };
                      };
                      readonly following: {
@@ -1702,7 +1702,7 @@ type ContractBase = Omit<
                         readonly cardinality: '1:N';
                         readonly on: {
                            readonly localFields: readonly ['id'];
-                           readonly targetFields: readonly ['followingId'];
+                           readonly targetFields: readonly ['followerId'];
                         };
                      };
                      readonly likes: {

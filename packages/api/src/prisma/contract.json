@@ -152,7 +152,7 @@
                         "cardinality": "N:1",
                         "nullable": false,
                         "on": {
-                           "localFields": ["followerId"],
+                           "localFields": ["followingId"],
                            "targetFields": ["id"]
                         },
                         "to": {
@@ -164,7 +164,7 @@
                         "cardinality": "N:1",
                         "nullable": false,
                         "on": {
-                           "localFields": ["followingId"],
+                           "localFields": ["followerId"],
                            "targetFields": ["id"]
                         },
                         "to": {
@@ -525,7 +525,7 @@
                         "cardinality": "1:N",
                         "on": {
                            "localFields": ["id"],
-                           "targetFields": ["followerId"]
+                           "targetFields": ["followingId"]
                         },
                         "to": {
                            "model": "Follow",
@@ -536,7 +536,7 @@
                         "cardinality": "1:N",
                         "on": {
                            "localFields": ["id"],
-                           "targetFields": ["followingId"]
+                           "targetFields": ["followerId"]
                         },
                         "to": {
                            "model": "Follow",
@@ -699,7 +699,7 @@
                      "foreignKeys": [
                         {
                            "source": {
-                              "columns": ["followerId"],
+                              "columns": ["followingId"],
                               "namespaceId": "public",
                               "tableName": "follow"
                            },
@@ -711,7 +711,7 @@
                         },
                         {
                            "source": {
-                              "columns": ["followingId"],
+                              "columns": ["followerId"],
                               "namespaceId": "public",
                               "tableName": "follow"
                            },
@@ -999,7 +999,7 @@
             "kind": "postgres-schema"
          }
       },
-      "storageHash": "fdfee8a763c0359398d8f6ba36c4b27d120781361425e275b3f2bc693546ea55"
+      "storageHash": "e72948db60fd09d76074b38d702d70403c32b796fff1c44c79508559dd65a8c1"
    },
    "execution": {
       "executionHash": "deca7024a189a6108da9e662bc0fe69968c8d4f1c71293e8099771369c7d7065",
