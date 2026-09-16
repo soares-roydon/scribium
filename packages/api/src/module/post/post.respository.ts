@@ -59,4 +59,25 @@ export const postRepository = {
    getPostId(slug: string) {
       return db.orm.public.Post.select('id').where({ slug }).first();
    },
+
+   hasLiked(userId: string, postId: string) {
+      return db.orm.public.Like.where({
+         userId,
+         postId,
+      }).first();
+   },
+
+   like(userId: string, postId: string) {
+      return db.orm.public.Like.create({
+         userId,
+         postId,
+      });
+   },
+
+   unLike(userId: string, postId: string) {
+      return db.orm.public.Like.where({
+         userId,
+         postId,
+      }).delete();
+   },
 };

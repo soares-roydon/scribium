@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { postService } from './post.service';
-import { blogSchema, queryParamSchema } from './post.types';
+import { blogSchema, queryParamSchema, statusSchema } from './post.types';
 
 export const postController = {
    async getBlogs(req: Request, res: Response) {
@@ -36,5 +36,26 @@ export const postController = {
       await postService.createBlog(userId, title, content);
 
       return res.status(201).json({ message: 'Blog created successfully' });
+   },
+
+   async like(req: Request, res: Response) {
+      const userId = req.userId!;
+      const parsedStatus = statusSchema.safeParse(req.body);
+      const parsedQueryParam = queryParamSchema.safeParse(req.params);
+
+      if (!parsedQueryParam || parsedQueryParam.data?.slug === undefined) {
+         return res.status(400).json({ error: 'Invalid query parameter' });
+      }
+
+      if (!parsedStatus.success) {
+         return res.status(400).json({ errror: 'Invalid status' });
+      }
+
+      const slug = parsedQueryParam.data.slug;
+      const status = parsedStatus.data.status;
+
+      await postService.like(userId, slug, status);
+
+      return res.status(200).json({ message: 'Success' });
    },
 };
