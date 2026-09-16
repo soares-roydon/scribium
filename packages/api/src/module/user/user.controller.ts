@@ -41,4 +41,12 @@ export const userController = {
          message: result.message,
       });
    },
+
+   async getUser(req: Request, res: Response) {
+      const userId = req.userId!;
+
+      const user = await userService.getUser(userId);
+
+      return res.status(200).json({ user });
+   },
 };

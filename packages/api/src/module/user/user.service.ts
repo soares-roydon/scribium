@@ -41,4 +41,8 @@ export const userService = {
          token,
       };
    },
+
+   getUser(userId: string) {
+      return userRepository.getUser(userId);
+   },
 };

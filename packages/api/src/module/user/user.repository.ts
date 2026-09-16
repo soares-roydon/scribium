@@ -14,4 +14,12 @@ export const userRepository = {
          password,
       });
    },
+
+   getUser(userId: string) {
+      return db.orm.public.User.where({ id: userId })
+         .select('id', 'name', 'email', 'bio')
+         .include('followers', (followers) => followers.count())
+         .include('following', (following) => following.count())
+         .first();
+   },
 };
