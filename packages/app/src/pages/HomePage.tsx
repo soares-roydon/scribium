@@ -5,7 +5,7 @@ import NavBar from '@/features/home/components/NavBar';
 const HomePage = () => {
    return (
       <>
-         <div className="h-dvh flex flex-col justify-between bg-violet-50">
+         <div className="h-dvh flex flex-col justify-between bg-violet-50 relative">
             <NavBar />
             <Main />
             <Footer />
