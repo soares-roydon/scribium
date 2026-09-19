@@ -3,22 +3,16 @@ import emailIcon from '../../home/asset/email.svg';
 import crossIcon from '../../home/asset/cross.svg';
 import Signup from '../components/signup/Signup';
 import Signin from '../components/signin/Signin';
+import type { AuthType } from '../types/types';
 
-type authType = 'signin' | 'signup';
 interface Props {
-   authType: authType;
-   setAuthShown: Dispatch<SetStateAction<boolean>>;
+   view: AuthType;
+   setView: Dispatch<SetStateAction<AuthType>>;
 }
 
-const AuthLayout = ({ authType, setAuthShown }: Props) => {
-   function closeAuth() {
-      if (authType === 'signup') {
-         setAuthShown(false);
-      }
-
-      if (authType === 'signin') {
-         setAuthShown(false);
-      }
+const AuthLayout = ({ view, setView }: Props) => {
+   if (view === null) {
+      return null;
    }
 
    return (
@@ -28,14 +22,18 @@ const AuthLayout = ({ authType, setAuthShown }: Props) => {
                <img
                   className="size-7 font-bold cursor-pointer"
                   src={crossIcon}
-                  onClick={closeAuth}
+                  onClick={() => setView(null)}
                />
             </div>
             <div className="flex justify-center">
                <img className="size-12" src={emailIcon} />
             </div>
             <div className="px-20">
-               {authType === 'signup' ? <Signup /> : <Signin />}
+               {view === 'signup' ? (
+                  <Signup onSwitchSignin={() => setView('signin')} />
+               ) : (
+                  <Signin onSwitchSignup={() => setView('signup')} />
+               )}
             </div>
          </div>
       </div>

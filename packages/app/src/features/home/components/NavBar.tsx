@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/button';
 import Scribium from './Scribium';
 import { useState } from 'react';
 import AuthLayout from '@/features/auth/layout/AuthLayout';
+import type { AuthType } from '@/features/auth/types/types';
 
 const NavBar = () => {
-   const [isSignupShown, setIsSignupShown] = useState(false);
-   const [isSigninShown, setIsSigninShown] = useState(false);
+   const [view, setView] = useState<AuthType>(null);
 
    return (
       <div className="flex justify-between px-6 py-3 border-b border-black md:px-12 lg:px-30 2xl:px-60">
@@ -14,20 +14,14 @@ const NavBar = () => {
             <Button
                className={'hidden font-normal sm:block'}
                variant={'link'}
-               onClick={() => setIsSigninShown(true)}
+               onClick={() => setView('signin')}
             >
                Sign in
             </Button>
-            <Button onClick={() => setIsSignupShown(true)}>Get Started</Button>
+            <Button onClick={() => setView('signup')}>Get Started</Button>
          </div>
 
-         {isSignupShown ? (
-            <AuthLayout authType="signup" setAuthShown={setIsSignupShown} />
-         ) : null}
-
-         {isSigninShown ? (
-            <AuthLayout authType="signin" setAuthShown={setIsSigninShown} />
-         ) : null}
+         <AuthLayout view={view} setView={setView} />
       </div>
    );
 };

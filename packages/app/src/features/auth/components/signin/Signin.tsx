@@ -1,21 +1,15 @@
 import { useState } from 'react';
 import InputBox from '../InputBox';
 import { Button } from '@/components/ui/button';
-import Continue from './Continue';
-import Signup from '../signup/Signup';
+import SigninPasswordStep from './SigninPasswordStep';
 
-const Signin = () => {
-   const [shouldContinue, setShouldContinue] = useState<Boolean>(false);
-   const [isSignupPageShown, setIsSignupPageShown] = useState<Boolean>(false);
-
-   if (isSignupPageShown) {
-      return <Signup />;
-   }
+const Signin = ({ onSwitchSignup }: { onSwitchSignup: () => void }) => {
+   const [step, setStep] = useState<'email' | 'password'>();
 
    return (
       <>
-         {shouldContinue ? (
-            <Continue />
+         {step === 'password' ? (
+            <SigninPasswordStep onSwitchSignup={onSwitchSignup} />
          ) : (
             <>
                <div className="font-serif text-xl text-center my-6 font-light">
@@ -26,17 +20,13 @@ const Signin = () => {
                      text={'Your email'}
                      placeholder={'Your email address'}
                   />
-                  <Button onClick={() => setShouldContinue(true)}>
-                     Continue
-                  </Button>
+                  <Button onClick={() => setStep('password')}>Continue</Button>
                </div>
                <div className="mt-10 text-center text-sm">
                   Don't have an account?{' '}
                   <span
                      className="underline cursor-pointer"
-                     onClick={() => {
-                        setIsSignupPageShown(true);
-                     }}
+                     onClick={onSwitchSignup}
                   >
                      Sign up
                   </span>
