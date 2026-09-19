@@ -1,4 +1,4 @@
-# Welcome to Prisma ORM!
+p# Welcome to Prisma ORM!
 
 Prisma ORM lets you query your database in simple, easy-to-read TypeScript. Define what your data looks like, and Prisma ORM gives you a fully typed client — with autocomplete for every table, column, and relation.
 

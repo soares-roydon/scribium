@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { followService } from './follow.service';
-import { followSchema } from './follow.types';
+import { followSchema } from '@scribium/shared';
 
 export const followController = {
    async getFollowers(req: Request, res: Response) {

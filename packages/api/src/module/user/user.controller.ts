@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { SigninSchema, SignupSchema } from './user.types';
+import { SigninSchema, SignupSchema } from '@scribium/shared';
 import { userService } from './user.service';
 
 export const userController = {

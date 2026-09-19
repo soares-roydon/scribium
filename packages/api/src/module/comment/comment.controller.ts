@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express';
-import { queryParamSchema } from '../post/post.types';
+import { queryParamSchema, commentSchema } from '@scribium/shared';
 import { commentService } from './comment.service';
-import { commentSchema } from './comment.types';
 
 export const commentController = {
    async getComments(req: Request, res: Response) {

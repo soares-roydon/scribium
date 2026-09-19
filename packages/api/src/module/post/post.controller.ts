@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { postService } from './post.service';
-import { blogSchema, queryParamSchema, statusSchema } from './post.types';
+import { blogSchema, queryParamSchema, statusSchema } from '@scribium/shared';
 
 export const postController = {
    async getBlogs(req: Request, res: Response) {
