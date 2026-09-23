@@ -16,7 +16,10 @@ export const postController = {
          return res.status(400).json({ error: 'Invalid query parameter' });
       }
 
-      const blog = await postService.getBlog(parsedQueryParam.data?.slug);
+      const blog = await postService.getBlog(
+         parsedQueryParam.data?.slug,
+         req.userId,
+      );
 
       return res.status(200).json({ blog });
    },

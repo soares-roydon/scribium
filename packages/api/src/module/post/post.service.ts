@@ -1,14 +1,32 @@
 import { AppError } from '../../errors/app-errors';
 import { postRepository } from './post.respository';
 import { slugify } from './post.utils';
+import { followRepository } from '../follow/follow.repository';
 
 export const postService = {
    getBlogs() {
       return postRepository.getBlogs();
    },
 
-   getBlog(slug: string) {
-      return postRepository.getBlog(slug);
+   async getBlog(slug: string, userId?: string) {
+      const post = await postRepository.getBlog(slug);
+
+      if (!post) return post;
+
+      let hasLiked = false;
+      let isFollowing = false;
+      if (userId) {
+         const likeRecord = await postRepository.hasLiked(userId, post.id);
+         hasLiked = !!likeRecord;
+
+         const followRecord = await followRepository.isFollowing(
+            userId,
+            post.author!.id,
+         );
+         isFollowing = !!followRecord;
+      }
+
+      return { ...post, hasLiked, isFollowing };
    },
 
    createBlog(userId: string, title: string, content: string) {

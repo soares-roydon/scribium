@@ -34,11 +34,12 @@ export const postRepository = {
       const post = db.orm.public.Post.select(
          'id',
          'title',
+         'content',
          'slug',
          'created_at',
          'published_at',
       )
-         .include('author', (author) => author.select('id', 'name'))
+         .include('author', (author) => author.select('id', 'name', 'bio'))
          .include('likes', (likes) => likes.count())
          .include('comments', (comments) => comments.count())
          .where({ slug })

@@ -29,3 +29,22 @@ export function authMiddleware(
       return res.status(403).json({ error: 'Invalid token, try signing in' });
    }
 }
+
+export function optionalAuthMiddleware(
+   req: Request,
+   res: Response,
+   next: NextFunction,
+) {
+   const token = req.cookies.token;
+
+   if (!token) {
+      return next();
+   }
+   try {
+      const decoded = verify(token, process.env.JWT_PASSWORD!) as MyPayload;
+      req.userId = decoded.userId;
+      next();
+   } catch (e) {
+      next();
+   }
+}
