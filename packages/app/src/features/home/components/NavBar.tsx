@@ -8,17 +8,21 @@ const NavBar = () => {
    const [view, setView] = useState<AuthType>(null);
 
    return (
-      <div className="flex justify-between px-6 py-3 border-b border-black md:px-12 lg:px-30 2xl:px-60">
+      <div className="flex justify-between items-center px-6 py-4 border-b border-black md:px-12 lg:px-30 2xl:px-60 bg-[#F7F4ED]">
          <Scribium />
-         <div className="flex gap-2">
-            <Button
-               className={'hidden font-normal sm:block'}
-               variant={'link'}
+         <div className="flex items-center gap-6 text-sm ">
+            <div
+               className="hidden sm:block cursor-pointer hover:font-medium"
                onClick={() => setView('signin')}
             >
-               Sign in
+               Sign In
+            </div>
+            <Button
+               className="bg-black text-white hover:bg-black/90 px-4"
+               onClick={() => setView('signup')}
+            >
+               Get started
             </Button>
-            <Button onClick={() => setView('signup')}>Get Started</Button>
          </div>
 
          <AuthLayout view={view} setView={setView} />
