@@ -13,6 +13,9 @@ interface Props {
 const SignupPasswordStep = ({ onSwitchSignin, user, setUser }: Props) => {
    const { data, isError, isPending, isSuccess, error, mutate } = useMutation({
       mutationFn: handleSignup,
+      onSuccess: () => {
+         window.location.reload();
+      },
    });
 
    async function handleSignup() {

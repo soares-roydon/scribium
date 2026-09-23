@@ -22,10 +22,10 @@ const Signup = ({ onSwitchSignin }: { onSwitchSignin: () => void }) => {
             />
          ) : (
             <>
-               <div className="font-serif text-xl text-center my-6 font-light">
-                  Sign up with email
+               <div className="font-serif text-3xl text-center my-6 text-black">
+                  Join Scribium.
                </div>
-               <div className="flex flex-col gap-4 mt-10">
+               <div className="flex flex-col gap-4 mt-8">
                   <InputBox
                      text={'Your full name'}
                      placeholder={'Your name'}

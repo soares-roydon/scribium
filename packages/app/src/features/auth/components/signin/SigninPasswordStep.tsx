@@ -13,6 +13,9 @@ interface Props {
 const SigninPasswordStep = ({ onSwitchSignup, user, setUser }: Props) => {
    const { data, isError, isSuccess, error, mutate } = useMutation({
       mutationFn: handleSignin,
+      onSuccess: () => {
+         window.location.reload();
+      },
    });
 
    async function handleSignin() {
@@ -23,6 +26,7 @@ const SigninPasswordStep = ({ onSwitchSignup, user, setUser }: Props) => {
             headers: {
                'Content-type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(user),
          },
       ).then(async (res) => {

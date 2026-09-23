@@ -21,10 +21,10 @@ const Signin = ({ onSwitchSignup }: { onSwitchSignup: () => void }) => {
             />
          ) : (
             <>
-               <div className="font-serif text-xl text-center my-6 font-light">
-                  Sign in with email
+               <div className="font-serif text-3xl text-center my-6 text-black">
+                  Welcome back.
                </div>
-               <div className="flex flex-col gap-4 mt-10">
+               <div className="flex flex-col gap-4 mt-8">
                   <InputBox
                      text={'Your email'}
                      placeholder={'Your email address'}
