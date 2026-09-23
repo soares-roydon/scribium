@@ -1,14 +1,24 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import HomePage from './pages/HomePage';
+import Toast from './features/auth/components/Toast';
 
 export function App() {
+   const queryClient = new QueryClient();
+
    return (
       <>
-         <BrowserRouter>
-            <Routes>
-               <Route path="/" element={<HomePage />} />
-            </Routes>
-         </BrowserRouter>
+         <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+               <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route
+                     path="/component"
+                     element={<Toast type={'success'} message="success" />}
+                  />
+               </Routes>
+            </BrowserRouter>
+         </QueryClientProvider>
       </>
    );
 }
