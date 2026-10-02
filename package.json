@@ -4,7 +4,8 @@
    "type": "module",
    "private": true,
    "devDependencies": {
-      "@types/bun": "latest"
+      "@types/bun": "latest",
+      "@types/node": "^26.6.4"
    },
    "scripts": {
       "format": "bunx prettier --write ."
