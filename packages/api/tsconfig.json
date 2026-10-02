@@ -2,6 +2,9 @@
    "extends": "../../tsconfig.json",
    "compilerOptions": {
       "rootDirs": ["src", "prisma.config.ts"],
-      "outDir": "dist"
+      "outDir": "dist",
+      "noEmit": false,
+      "noEmitOnError": true,
+      "rewriteRelativeImportExtensions": true
    }
 }

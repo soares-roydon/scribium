@@ -15,7 +15,9 @@
       "typescript": "^7"
    },
    "scripts": {
-      "contract:emit": "prisma contract emit"
+      "contract:emit": "prisma contract emit",
+      "build": "tsc",
+      "start": "bun src/index.js"
    },
    "dependencies": {
       "@prisma/cli-engine": "^0.3.0",
