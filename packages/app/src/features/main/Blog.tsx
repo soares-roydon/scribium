@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileIcon from './icons/ProfileIcon';
 import Dot from './icons/Dot';
 import LikeIcon from './icons/LikeIcon';
@@ -29,27 +28,28 @@ const Blog = ({ blog }: { blog: BlogData }) => {
 
    return (
       <div
-         className="flex flex-col-reverse sm:flex-row justify-between gap-x-8 gap-y-6 max-w-170 border-b border-zinc-100 py-8 cursor-pointer group"
+         className="flex flex-col-reverse sm:flex-row justify-between gap-x-8 gap-y-4 max-w-170 border-b border-zinc-100 py-6 md:py-8 cursor-pointer group"
          onClick={() => {
             navigate(`/${blog.slug}`);
          }}
       >
          <div className="flex-1 min-w-0 flex flex-col justify-center">
-            <div className="flex items-center gap-2 text-[13px] mb-3">
+            <div className="flex items-center gap-1.5 text-xs md:text-[13px] mb-2 md:mb-3 ">
                <ProfileIcon size={6} />
                <div className="font-medium text-zinc-900 hover:underline">
                   {author.name}
                </div>
+               <Dot />
+               <span className="text-zinc-500 text-xs">{day}</span>
             </div>
-            <div className="text-[22px] font-extrabold mb-2 line-clamp-2 leading-tight text-zinc-900 group-hover:text-black">
+            <div className="text-xl md:text-[22px] font-extrabold mb-1 md:mb-2 line-clamp-2 leading-tight text-zinc-950 group-hover:text-black">
                {title}
             </div>
-            <div className="text-[#6B6B6B] text-[16px] mb-6 leading-6 line-clamp-2">
+            <div className="text-[#6B6B6B] text-sm md:text-[16px] mb-4 md:mb-6 leading-relaxed md:leading-6 line-clamp-2 md:line-clamp-3">
                {content}
             </div>
-            <div className="flex justify-between items-center text-[#6B6B6B] text-[13px] mt-auto">
+            <div className="flex justify-between items-center text-[#6B6B6B] text-xs md:text-[13px] mt-auto">
                <div className="flex items-center gap-4">
-                  <span>{day}</span>
                   <div className="flex items-center gap-1.5 hover:text-black transition-colors">
                      <LikeIcon type="solid" />
                      <span>{likes}</span>

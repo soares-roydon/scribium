@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import type { SignupInput } from '@scribium/shared';
 import InputBox from '../InputBox';
 import { Button } from '@/components/ui/button';
@@ -64,7 +64,7 @@ const SignupPasswordStep = ({ onSwitchSignin, user, setUser }: Props) => {
                   className="underline cursor-pointer"
                   onClick={onSwitchSignin}
                >
-                  Sign up
+                  Sign in
                </span>
             </div>
          </div>

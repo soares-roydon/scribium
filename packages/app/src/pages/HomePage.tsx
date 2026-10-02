@@ -2,7 +2,7 @@ import Footer from '@/features/home/components/Footer';
 import Main from '@/features/home/components/Main';
 import NavBar from '@/features/home/components/NavBar';
 import Blogs from '@/features/main/Blogs';
-import NavBar2 from '@/features/main/NavBar';
+import MainLayout from '@/components/layout/MainLayout';
 import { useQuery } from '@tanstack/react-query';
 
 const HomePage = () => {
@@ -45,16 +45,15 @@ const HomePage = () => {
    return (
       <>
          {user && isBlogsSuccess ? (
-            <div>
-               <div className="sticky top-0 z-50">
-                  <NavBar2 />
-               </div>
-               <div className="flex justify-center px-4 sm:px-6 mb-20">
-                  <div className="w-full max-w-170">
-                     <Blogs blogs={blogs} />
+            <>
+               <MainLayout>
+                  <div className="flex justify-center px-4 sm:px-6 mb-20 mt-8">
+                     <div className="w-full max-w-170">
+                        <Blogs blogs={blogs} />
+                     </div>
                   </div>
-               </div>
-            </div>
+               </MainLayout>
+            </>
          ) : (
             <div className="h-dvh flex flex-col justify-between bg-[#F7F4ED] relative">
                <NavBar />

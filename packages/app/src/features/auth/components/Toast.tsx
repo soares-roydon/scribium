@@ -77,7 +77,7 @@ const Toast = ({ type, message }: Props) => {
    return (
       <>
          <div
-            className={`flex gap-2 items-center px-2 py-1 border rounded-md ${getMessageColor()}`}
+            className={`flex gap-2 items-center px-2 py-1 border rounded-md text-sm ${getMessageColor()}`}
          >
             <div>{getIcon()}</div>
             <div>{message}</div>

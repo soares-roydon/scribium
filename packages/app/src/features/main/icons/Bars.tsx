@@ -6,7 +6,7 @@ const Bars = () => {
          viewBox="0 0 24 24"
          strokeWidth="1.5"
          stroke="currentColor"
-         className="size-6 text-zinc-500"
+         className="size-6 text-zinc-500 cursor-pointer hover:text-black"
       >
          <path
             strokeLinecap="round"

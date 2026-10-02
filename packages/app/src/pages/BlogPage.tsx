@@ -3,10 +3,10 @@ import CommentIcon from '@/features/main/icons/CommentIcon';
 import Dot from '@/features/main/icons/Dot';
 import LikeIcon from '@/features/main/icons/LikeIcon';
 import ProfileIcon from '@/features/main/icons/ProfileIcon';
-import NavBar from '@/features/main/NavBar';
 import Comments from '@/features/main/Comments';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import MainLayout from '@/components/layout/MainLayout';
 
 const BlogPage = () => {
    const { slug } = useParams();
@@ -88,25 +88,98 @@ const BlogPage = () => {
 
    return (
       <>
-         <div className="sticky top-0 z-50">
-            <NavBar />
-         </div>
-         <div className="flex justify-center p-4">
-            <div className="flex flex-col min-w-xl w-full max-w-170 mt-10">
-               <div className="text-[42px] font-extrabold mb-6 leading-tight tracking-tight text-zinc-900">
-                  {data?.blog?.title}
-               </div>
-
-               <div className="flex gap-2 items-center mb-8">
-                  <ProfileIcon size={10} />
-                  <div className="flex flex-col">
-                     <div className="flex items-center gap-4">
-                        <div className="font-medium text-zinc-900 hover:underline cursor-pointer">
-                           {data?.blog?.author?.name}
+         <MainLayout>
+            <div className="flex justify-center p-4">
+               <div className="flex flex-col w-full max-w-170 mt-6 md:mt-10 overflow-hidden">
+                  <div className="text-3xl md:text-[42px] font-extrabold mb-6 leading-tight tracking-tight text-zinc-900 wrap-break-word">
+                     {data?.blog?.title}
+                  </div>
+                  <div className="flex gap-2 md:gap-4 items-start md:items-center mb-8">
+                     <div className="mt-1 md:mt-0 shrink-0">
+                        <ProfileIcon size={10} />
+                     </div>
+                     <div className="flex flex-col min-w-0">
+                        <div className="flex flex-wrap items-center gap-2 md:gap-4">
+                           <div className="font-medium text-zinc-900 hover:underline cursor-pointer truncate">
+                              {data?.blog?.author?.name}
+                           </div>
+                           <Button
+                              variant={'outline'}
+                              className="rounded-full border-zinc-800 font-normal group w-24 h-8 px-2 md:px-4 text-xs md:text-sm"
+                              onClick={() => followUser()}
+                           >
+                              {data?.blog?.isFollowing ? (
+                                 <>
+                                    <span className="group-hover:hidden">
+                                       Following
+                                    </span>
+                                    <span className="hidden group-hover:block text-red-600">
+                                       Unfollow
+                                    </span>
+                                 </>
+                              ) : (
+                                 'Follow'
+                              )}
+                           </Button>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm text-zinc-500 mt-2 md:mt-1">
+                           <div>
+                              {Math.round(
+                                 (data?.blog?.content?.length || 0) / 100,
+                              ) || 1}{' '}
+                              min read
+                           </div>
+                           <Dot />
+                           <div>{localDate}</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="flex gap-6 py-3 border-y border-zinc-100 text-zinc-500 mb-8 md:mb-10">
+                     <div
+                        className="flex gap-2 items-center cursor-pointer hover:text-zinc-900"
+                        onClick={() => mutate()}
+                     >
+                        <LikeIcon
+                           type={data?.blog?.hasLiked ? 'solid' : 'outline'}
+                           size={6}
+                        />
+                        <div className="text-sm">{data?.blog?.likes || 0}</div>
+                     </div>
+                     <div className="flex gap-2 items-center cursor-pointer hover:text-zinc-900">
+                        <CommentIcon type="outline" size={6} />
+                        <div className="text-sm">
+                           {data?.blog?.comments || 0}
+                        </div>
+                     </div>
+                  </div>
+                  <div className="text-lg md:text-[20px] text-zinc-800 font-serif mb-12 whitespace-pre-wrap leading-relaxed wrap-break-word">
+                     {data?.blog?.content}
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 py-8 border-t border-zinc-100 items-start">
+                     <div className="hidden sm:block shrink-0">
+                        <ProfileIcon size={12} />
+                     </div>
+                     <div className="block sm:hidden shrink-0">
+                        <ProfileIcon size={10} />
+                     </div>
+                     <div className="flex flex-col sm:flex-row justify-between w-full items-start gap-4">
+                        <div className="flex flex-col gap-2 min-w-0">
+                           <div className="font-bold text-xl md:text-2xl wrap-break-word">
+                              Written by {data?.blog?.author?.name}
+                           </div>
+                           <div className="text-zinc-500 text-sm md:text-base wrap-break-word">
+                              {data?.blog?.author?.bio || 'Scribium Writer'}
+                           </div>
                         </div>
                         <Button
-                           variant={'outline'}
-                           className="rounded-full border-zinc-800 font-normal group w-24"
+                           variant={
+                              data?.blog?.isFollowing ? 'outline' : 'default'
+                           }
+                           className={`rounded-full px-4 py-2 h-auto text-sm group w-24 shrink-0 ${
+                              data?.blog?.isFollowing
+                                 ? 'border-zinc-800 font-normal'
+                                 : 'bg-green-600 hover:bg-green-700 text-white'
+                           }`}
                            onClick={() => followUser()}
                         >
                            {data?.blog?.isFollowing ? (
@@ -122,81 +195,12 @@ const BlogPage = () => {
                               'Follow'
                            )}
                         </Button>
-                        <div className="flex items-center gap-2 text-sm text-zinc-500">
-                           <div>
-                              {Math.round(
-                                 (data?.blog?.content?.length || 0) / 100,
-                              ) || 1}{' '}
-                              min read
-                           </div>
-                           <Dot />
-                           <div>{localDate}</div>
-                        </div>
                      </div>
                   </div>
+                  {slug && <Comments slug={slug} />}
                </div>
-
-               <div className="flex gap-6 py-3 border-y border-zinc-100 text-zinc-500 mb-10">
-                  <div
-                     className="flex gap-2 items-center cursor-pointer hover:text-zinc-900"
-                     onClick={() => mutate()}
-                  >
-                     <LikeIcon
-                        type={data?.blog?.hasLiked ? 'solid' : 'outline'}
-                        size={6}
-                     />
-                     <div className="text-sm">{data?.blog?.likes || 0}</div>
-                  </div>
-                  <div className="flex gap-2 items-center cursor-pointer hover:text-zinc-900">
-                     <CommentIcon type="outline" size={6} />
-                     <div className="text-sm">{data?.blog?.comments || 0}</div>
-                  </div>
-               </div>
-
-               <div className="text-[20px] text-zinc-800 font-serif mb-12 whitespace-pre-wrap leading-relaxed">
-                  {data?.blog?.content}
-               </div>
-               <div className="flex gap-4 py-8 border-t border-zinc-100">
-                  <ProfileIcon size={12} />
-                  <div className="flex justify-between w-full items-start">
-                     <div className="flex flex-col gap-2">
-                        <div className="font-bold text-2xl">
-                           Written by {data?.blog?.author?.name}
-                        </div>
-                        <div className="text-zinc-500 text-base">
-                           {data?.blog?.author?.bio || 'Scribium Writer'}
-                        </div>
-                     </div>
-                     <Button
-                        variant={
-                           data?.blog?.isFollowing ? 'outline' : 'default'
-                        }
-                        className={`rounded-full px-4 py-2 h-auto text-sm group w-24 ${
-                           data?.blog?.isFollowing
-                              ? 'border-zinc-800 font-normal'
-                              : 'bg-green-600 hover:bg-green-700 text-white'
-                        }`}
-                        onClick={() => followUser()}
-                     >
-                        {data?.blog?.isFollowing ? (
-                           <>
-                              <span className="group-hover:hidden">
-                                 Following
-                              </span>
-                              <span className="hidden group-hover:block text-red-600">
-                                 Unfollow
-                              </span>
-                           </>
-                        ) : (
-                           'Follow'
-                        )}
-                     </Button>
-                  </div>
-               </div>
-
-               {slug && <Comments slug={slug} />}
             </div>
-         </div>
+         </MainLayout>
       </>
    );
 };
