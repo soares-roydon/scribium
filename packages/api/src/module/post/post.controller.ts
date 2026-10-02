@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { postService } from './post.service';
+import { postService } from './post.service.js';
 import { blogSchema, queryParamSchema, statusSchema } from '@scribium/shared';
 
 export const postController = {

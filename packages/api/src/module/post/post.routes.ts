@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { postController } from './post.controller';
-import commentRouter from '../comment/comment.routes';
+import { postController } from './post.controller.js';
+import commentRouter from '../comment/comment.routes.js';
 import {
    authMiddleware,
    optionalAuthMiddleware,
-} from '../../middlewares/auth.middleware';
+} from '../../middlewares/auth.middleware.js';
 
 const router = Router();
 

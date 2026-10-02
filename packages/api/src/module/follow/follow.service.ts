@@ -1,5 +1,5 @@
-import { AppError } from '../../errors/app-errors';
-import { followRepository } from './follow.repository';
+import { AppError } from '../../errors/app-errors.js';
+import { followRepository } from './follow.repository.js';
 
 export const followService = {
    getFollowers(userId: string) {

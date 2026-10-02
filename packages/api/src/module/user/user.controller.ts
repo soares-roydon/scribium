@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { SigninSchema, SignupSchema } from '@scribium/shared';
-import { userService } from './user.service';
+import { userService } from './user.service.js';
 
 export const userController = {
    async signup(req: Request, res: Response) {

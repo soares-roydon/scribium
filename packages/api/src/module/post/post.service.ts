@@ -1,7 +1,7 @@
-import { AppError } from '../../errors/app-errors';
-import { postRepository } from './post.respository';
-import { slugify } from './post.utils';
-import { followRepository } from '../follow/follow.repository';
+import { AppError } from '../../errors/app-errors.js';
+import { postRepository } from './post.repository.js';
+import { slugify } from './post.utils.js';
+import { followRepository } from '../follow/follow.repository.js';
 
 export const postService = {
    getBlogs() {

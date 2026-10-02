@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { followService } from './follow.service';
+import { followService } from './follow.service.js';
 import { followSchema } from '@scribium/shared';
 
 export const followController = {

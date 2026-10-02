@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { followController } from './follow.controller';
-import { authMiddleware } from '../../middlewares/auth.middleware';
+import { followController } from './follow.controller.js';
+import { authMiddleware } from '../../middlewares/auth.middleware.js';
 
 // GET /api/v1/user/followers
 // GET /api/v1/user/following

@@ -1,5 +1,5 @@
-import { db } from '../../prisma/db';
-import { postRepository } from '../post/post.respository';
+import { db } from '../../prisma/db.js';
+import { postRepository } from '../post/post.repository.js';
 
 export const commentRepository = {
    async getComments(slug: string) {

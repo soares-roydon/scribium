@@ -1,8 +1,8 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import userRouter from './module/user/user.routes';
-import postRouter from './module/post/post.routes';
-import { errorMiddleware } from './middlewares/error.middleware';
+import userRouter from './module/user/user.routes.js';
+import postRouter from './module/post/post.routes.js';
+import { errorMiddleware } from './middlewares/error.middleware.js';
 import cors from 'cors';
 
 const PORT = 3001;

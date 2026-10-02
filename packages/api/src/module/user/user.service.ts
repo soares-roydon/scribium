@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { userRepository } from './user.repository';
-import { SALT_COUNT } from './user.data';
-import { AppError } from '../../errors/app-errors';
+import { userRepository } from './user.repository.js';
+import { SALT_COUNT } from './user.data.js';
+import { AppError } from '../../errors/app-errors.js';
 
 export const userService = {
    async createUser(name: string, email: string, password: string) {
