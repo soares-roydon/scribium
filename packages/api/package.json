@@ -16,7 +16,7 @@
    },
    "scripts": {
       "contract:emit": "prisma contract emit",
-      "build": "tsc",
+      "build": "bun build ./src/index.ts --outdir dist --target bun",
       "start": "bun src/index.js"
    },
    "dependencies": {

@@ -5,8 +5,6 @@
       "outDir": "dist",
       "noEmit": false,
       "noEmitOnError": true,
-      "rewriteRelativeImportExtensions": true,
-      "typeRoots": ["./node_modules/@types"],
-      "types": ["bun"]
+      "rewriteRelativeImportExtensions": true
    }
 }
