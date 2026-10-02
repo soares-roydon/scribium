@@ -18,6 +18,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+   res.send('Server health: healthy');
+});
+
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/blogs', postRouter);
 
