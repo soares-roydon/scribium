@@ -17,7 +17,7 @@
    "scripts": {
       "contract:emit": "prisma contract emit",
       "build": "bun build ./src/index.ts --outdir dist --target bun",
-      "start": "bun src/index.js"
+      "start": "bun dist/index.js"
    },
    "dependencies": {
       "@prisma/cli-engine": "^0.3.0",
