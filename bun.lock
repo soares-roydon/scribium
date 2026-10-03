@@ -39,7 +39,7 @@
         "tsx": "^4.23.13",
       },
       "peerDependencies": {
-        "typescript": "^7",
+        "typescript": "^7.0.2",
       },
     },
     "packages/app": {

@@ -13,9 +13,10 @@
       "tsx": "^4.23.13"
    },
    "peerDependencies": {
-      "typescript": "^7"
+      "typescript": "^7.0.2"
    },
    "scripts": {
+      "build": "cd ../shared && bun run build",
       "contract:emit": "prisma contract emit"
    },
    "dependencies": {
