@@ -13,9 +13,10 @@
    "peerDependencies": {
       "typescript": "^7"
    },
-   "workspaces": [
-      "packages/*"
-   ],
+   "workspaces": {
+      "packages": ["packages/*"],
+      "selfContained": ["packages/api"]
+   },
    "dependencies": {
       "prettier": "3.9.6"
    }
