@@ -13,10 +13,15 @@ export const userService = {
       }
 
       const hashed_password = await bcrypt.hash(password, SALT_COUNT);
-      await userRepository.createUser(name, email, hashed_password);
+      const newUser = await userRepository.createUser(
+         name,
+         email,
+         hashed_password,
+      );
 
       return {
          message: 'Account created successfully',
+         userId: newUser.id,
       };
    },
 
@@ -33,7 +38,7 @@ export const userService = {
       }
 
       const token = jwt.sign({ userId: user.id }, process.env.JWT_PASSWORD!, {
-         expiresIn: '15m',
+         expiresIn: '1d',
       });
 
       return {

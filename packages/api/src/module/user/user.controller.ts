@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import { SigninSchema, SignupSchema } from '@scribium/shared';
 import { userService } from './user.service.js';
 
@@ -15,7 +16,22 @@ export const userController = {
       const { name, email, password } = parsedUser.data;
       const result = await userService.createUser(name, email, password);
 
-      return res.status(201).json({ message: result.message });
+      const token = jwt.sign(
+         { userId: result.userId },
+         process.env.JWT_PASSWORD!,
+         {
+            expiresIn: '15m',
+         },
+      );
+
+      res.cookie('token', token, {
+         maxAge: 900000,
+         httpOnly: true,
+         secure: process.env.NODE_ENV === 'production',
+         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      });
+
+      return res.status(201).json({ message: result.message, token });
    },
 
    async signin(req: Request, res: Response) {
@@ -32,9 +48,10 @@ export const userController = {
 
       // Todo: Make secure and expiry - Done
       res.cookie('token', result.token, {
-         maxAge: 900000, // 15 minutes in milliseconds
-         httpOnly: true, // Prevents client-side JS access
-         // secure: true, // Only sends over HTTPS
+         maxAge: 1000 * 60 * 60 * 24,
+         httpOnly: true,
+         secure: process.env.NODE_ENV === 'production',
+         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       });
 
       return res.status(200).json({
