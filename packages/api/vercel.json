@@ -1,10 +1,10 @@
 {
    "builds": [
       {
-         "src": "packages/api/**/*.ts",
+         "src": "src/index.ts",
          "use": "@vercel/bun",
          "config": {
-            "includeFiles": ["packages/shared/**/*"]
+            "includeFiles": ["../shared/**/*"]
          }
       }
    ],
