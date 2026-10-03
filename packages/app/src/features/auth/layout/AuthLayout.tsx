@@ -7,7 +7,7 @@ import type { AuthType } from '../types/types';
 
 interface Props {
    view: AuthType;
-   setView: Dispatch<SetStateAction<AuthType>>;
+   setView: (view: AuthType) => void;
 }
 
 const AuthLayout = ({ view, setView }: Props) => {

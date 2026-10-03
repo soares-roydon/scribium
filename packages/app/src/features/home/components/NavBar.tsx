@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button';
 import Scribium from './Scribium';
-import { useState } from 'react';
 import AuthLayout from '@/features/auth/layout/AuthLayout';
 import type { AuthType } from '@/features/auth/types/types';
 
-const NavBar = () => {
-   const [view, setView] = useState<AuthType>(null);
-
+const NavBar = ({
+   view,
+   setView,
+}: {
+   view: AuthType;
+   setView: (view: AuthType) => void;
+}) => {
    return (
       <div className="flex justify-between items-center px-6 py-4 border-b border-black md:px-12 lg:px-30 2xl:px-60 bg-[#F7F4ED]">
          <Scribium />

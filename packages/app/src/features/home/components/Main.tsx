@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button';
 import homeImage from '../asset/home.svg';
+import type { AuthType } from '@/features/auth/types/types';
 
-const Main = () => {
+const Main = ({ setView }: { setView: (view: AuthType) => void }) => {
    return (
       <div className="flex justify-between items-center h-full px-6 md:px-12 lg:pl-20 2xl:pl-60 bg-[#F7F4ED] border-b border-black">
          <div>
@@ -11,7 +12,10 @@ const Main = () => {
             <div className="text-2xl text-black/80 max-w-lg mb-12">
                A place to read, write, and deepen your understanding
             </div>
-            <Button className="bg-black text-white hover:bg-black/90 px-8 py-6 text-xl">
+            <Button
+               className="bg-black text-white hover:bg-black/90 px-8 py-6 text-xl"
+               onClick={() => setView('signup')}
+            >
                Start reading
             </Button>
          </div>

@@ -4,8 +4,11 @@ import NavBar from '@/features/home/components/NavBar';
 import Blogs from '@/features/main/Blogs';
 import MainLayout from '@/components/layout/MainLayout';
 import { useQuery } from '@tanstack/react-query';
+import type { AuthType } from '@/features/auth/types/types';
+import { useState } from 'react';
 
 const HomePage = () => {
+   const [view, setView] = useState<AuthType>(null);
    const { data: user, isPending: isUserPending } = useQuery({
       queryKey: ['user'],
       queryFn: async () => {
@@ -56,8 +59,8 @@ const HomePage = () => {
             </>
          ) : (
             <div className="h-dvh flex flex-col justify-between bg-[#F7F4ED] relative">
-               <NavBar />
-               <Main />
+               <NavBar view={view} setView={setView} />
+               <Main setView={setView} />
                <Footer />
             </div>
          )}
