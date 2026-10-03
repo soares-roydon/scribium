@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { decode, verify, type JwtPayload } from 'jsonwebtoken';
+import jwt, { type JwtPayload } from 'jsonwebtoken';
 
 declare global {
    namespace Express {
@@ -22,7 +22,7 @@ export function authMiddleware(
       return res.status(401).json({ error: 'No token provided' });
    }
    try {
-      const decoded = verify(token, process.env.JWT_PASSWORD!) as MyPayload;
+      const decoded = jwt.verify(token, process.env.JWT_PASSWORD!) as MyPayload;
       req.userId = decoded.userId;
       next();
    } catch (e) {
@@ -41,7 +41,7 @@ export function optionalAuthMiddleware(
       return next();
    }
    try {
-      const decoded = verify(token, process.env.JWT_PASSWORD!) as MyPayload;
+      const decoded = jwt.verify(token, process.env.JWT_PASSWORD!) as MyPayload;
       req.userId = decoded.userId;
       next();
    } catch (e) {

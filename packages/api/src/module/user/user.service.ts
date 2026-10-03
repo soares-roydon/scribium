@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { userRepository } from './user.repository.js';
 import { SALT_COUNT } from './user.data.js';
 import { AppError } from '../../errors/app-errors.js';
@@ -32,7 +32,7 @@ export const userService = {
          throw new AppError(403, 'Invalid credentials');
       }
 
-      const token = sign({ userId: user.id }, process.env.JWT_PASSWORD!, {
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_PASSWORD!, {
          expiresIn: '15m',
       });
 
