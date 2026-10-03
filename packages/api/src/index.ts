@@ -27,6 +27,8 @@ app.use('/api/v1/blogs', postRouter);
 
 app.use(errorMiddleware);
 
+export default app;
+
 app.listen(PORT, () => {
    console.log(`http://localhost:${PORT}`);
 });
