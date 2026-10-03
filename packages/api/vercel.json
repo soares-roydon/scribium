@@ -1,3 +1,12 @@
 {
-  "bunVersion": "1.4.x"
+   "builds": [
+      {
+         "src": "packages/api/**/*.ts",
+         "use": "@vercel/bun",
+         "config": {
+            "includeFiles": ["packages/shared/**/*"]
+         }
+      }
+   ],
+   "bunVersion": "1.4.x"
 }
