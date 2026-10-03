@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { AuthType } from '@/features/auth/types/types';
 import { useState } from 'react';
 
+import Scribium from '@/features/home/components/Scribium';
+
 const HomePage = () => {
    const [view, setView] = useState<AuthType>(null);
    const { data: user, isPending: isUserPending } = useQuery({
@@ -26,7 +28,11 @@ const HomePage = () => {
       retry: false,
    });
 
-   const { data: blogs, isSuccess: isBlogsSuccess } = useQuery({
+   const {
+      data: blogs,
+      isSuccess: isBlogsSuccess,
+      isPending: isBlogsPending,
+   } = useQuery({
       queryKey: ['blogs'],
       queryFn: async () => {
          const res = await fetch(
@@ -41,8 +47,12 @@ const HomePage = () => {
       enabled: !!user,
    });
 
-   if (isUserPending) {
-      return null;
+   if (isUserPending || (user && isBlogsPending)) {
+      return (
+         <div className="h-dvh flex justify-center items-center bg-[#F7F4ED]">
+            <Scribium className="animate-shimmer-text text-4xl sm:text-5xl" />
+         </div>
+      );
    }
 
    return (

@@ -1,6 +1,13 @@
-const Scribium = () => {
+import { cn } from '@/lib/utils';
+
+const Scribium = ({ className }: { className?: string }) => {
    return (
-      <div className="font-serif font-bold text-3xl tracking-tighter">
+      <div
+         className={cn(
+            'font-serif font-bold text-3xl tracking-tighter',
+            className,
+         )}
+      >
          Scribium
       </div>
    );
