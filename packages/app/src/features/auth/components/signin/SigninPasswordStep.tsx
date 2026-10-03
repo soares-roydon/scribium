@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import type { SigninInput } from '@scribium/shared';
 import InputBox from '../InputBox';
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const SigninPasswordStep = ({ onSwitchSignup, user, setUser }: Props) => {
-   const { data, isError, isSuccess, error, mutate } = useMutation({
+   const { data, isError, isPending, isSuccess, error, mutate } = useMutation({
       mutationFn: handleSignin,
       onSuccess: () => {
          window.location.reload();
@@ -57,8 +58,12 @@ const SigninPasswordStep = ({ onSwitchSignup, user, setUser }: Props) => {
                <Toast type={'success'} message={data.message} />
             ) : null}
 
-            <Button onClick={() => mutate()} disabled={!user.password.trim()}>
-               Sign in
+            <Button
+               onClick={() => mutate()}
+               disabled={!user.password.trim() || isPending}
+            >
+               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+               {isPending ? 'Signing in...' : 'Sign in'}
             </Button>
             <div className="mt-10 text-center text-sm">
                Don't have an account?{' '}

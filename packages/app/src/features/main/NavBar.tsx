@@ -44,10 +44,6 @@ const NavBar = ({
                <WriteIcon />
                <div className="hidden md:block">Write</div>
             </Link>
-            <Bell
-               className="w-6 h-6 text-zinc-500 hover:text-black cursor-pointer"
-               strokeWidth={1.5}
-            />
             <div className="cursor-pointer">
                <ProfileIcon />
             </div>

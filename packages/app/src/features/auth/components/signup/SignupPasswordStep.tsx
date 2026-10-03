@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import type { SignupInput } from '@scribium/shared';
 import InputBox from '../InputBox';
@@ -55,7 +56,11 @@ const SignupPasswordStep = ({ onSwitchSignin, user, setUser }: Props) => {
                <Toast type={'success'} message={data.message} />
             ) : null}
 
-            <Button onClick={() => mutate()} disabled={!user.password.trim()}>
+            <Button
+               onClick={() => mutate()}
+               disabled={!user.password.trim() || isPending}
+            >
+               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                {isPending ? 'Signing up...' : 'Sign up'}
             </Button>
             <div className="mt-10 text-center text-sm">

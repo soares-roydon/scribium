@@ -7,11 +7,12 @@ import Comments from '@/features/main/Comments';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
+import BlogPageSkeleton from '@/components/layout/BlogPageSkeleton';
 
 const BlogPage = () => {
    const { slug } = useParams();
    const queryClient = useQueryClient();
-   const { data } = useQuery({
+   const { data, isPending } = useQuery({
       queryKey: [slug],
       queryFn: getBlog,
    });
@@ -85,6 +86,14 @@ const BlogPage = () => {
          queryClient.invalidateQueries({ queryKey: [slug] });
       },
    });
+
+   if (isPending) {
+      return (
+         <MainLayout>
+            <BlogPageSkeleton />
+         </MainLayout>
+      );
+   }
 
    return (
       <>
