@@ -14,8 +14,7 @@
       "typescript": "^7"
    },
    "workspaces": {
-      "packages": ["packages/*"],
-      "selfContained": ["packages/api"]
+      "packages": ["packages/*"]
    },
    "dependencies": {
       "prettier": "3.9.6"
